@@ -6,36 +6,31 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int N = Integer.parseInt(br.readLine());
+        String word[] = new String[N];
 
-        int count = Integer.parseInt(br.readLine());
-        String[] words = new String[count];
-
-        for (int i = 0; i < count; i++) {
-            words[i] = br.readLine();
+        // 단어 입력
+        for (int i = 0; i < word.length; i++) {
+            word[i] = br.readLine();
         }
 
-        Arrays.sort(words, (e1, e2) -> {
-            // 길이가 같으면 단어 사전 비교
-            if (e1.length() == e2.length()) {
+        // 단어 길이 비교
+        Arrays.sort(word, (e1, e2) -> {
+            if(e1.length() == e2.length()) {
                 return e1.compareTo(e2);
-                // 길이가 다르면 짧은 순
             } else {
                 return e1.length() - e2.length();
             }
         });
 
-        StringBuilder sb = new StringBuilder();
-
-        // Arrayindexoutofboundsexception 방지
-        System.out.println(words[0]);
-
-        for (int i = 1; i < count; i++) {
-            // 중복 제거
-            if(!words[i].equals(words[i - 1])) {
-                sb.append(words[i]).append("\n");
+        // 단어 중복 방지
+        for (int i = 0; i < word.length - 1; i++) {
+            // 정렬된 상태이므로 앞 뒤 비교 가능
+            if(!word[i].equals(word[i + 1])) {
+                sb.append(word[i]).append('\n');
             }
         }
-
-        System.out.print(sb);
+        System.out.println(sb + word[N - 1]);
     }
 }
