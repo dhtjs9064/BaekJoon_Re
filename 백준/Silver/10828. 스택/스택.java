@@ -3,19 +3,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+// switch문으로 해결
+// 각 문자열마다 기능이 있으므로 메서드 만들기
 public class Main {
-
-    public static int[] stack;
-    public static int size = 0;
+    static int[] stack;
+    static int size = 0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
         StringTokenizer st;
 
         int count = Integer.parseInt(br.readLine());
-
         stack = new int[count];
+
+        StringBuilder sb = new StringBuilder();
 
         while (count-- > 0) {
             st = new StringTokenizer(br.readLine());
@@ -25,62 +26,107 @@ public class Main {
                     push(Integer.parseInt(st.nextToken()));
                     break;
 
-                case "pop" :
+                case "pop":
                     sb.append(pop()).append('\n');
                     break;
 
-                case "size" :
+                case "size":
                     sb.append(size()).append('\n');
                     break;
 
-                case "empty" :
+                case "empty":
                     sb.append(empty()).append('\n');
                     break;
 
-                case "top" :
+                case "top":
                     sb.append(top()).append('\n');
-                    break;
             }
         }
 
         System.out.println(sb);
     }
 
-    public static void push(int item) {
-        stack[size] = item;
+    static void push(int x) {
+        stack[size] = x;
         size++;
     }
 
-    public static int pop() {
+    static int pop() {
         if (size == 0) {
             return -1;
-        } else {
-            // 인덱스 0 = 값이 있는거니까
-            int res = stack[size - 1];
-            stack[size - 1] = 0;
-            size--;
-            return res;
         }
+
+        int res = stack[size - 1];
+        size--;
+        return res;
     }
 
-    public static int size() {
+    static int size() {
         return size;
     }
 
-    public static int empty() {
+    static int empty() {
         if (size == 0) {
             return 1;
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
-    public static int top() {
+    static int top() {
         if (size == 0) {
             return -1;
-        } else {
-            // 인덱스 0 방지
-            return stack[size - 1];
         }
+
+        // top = peek 즉, 그 정수는 없앨 필요가 없음
+        return stack[size - 1];
     }
 }
+/*    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        Stack<Integer> stack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+
+        int count = Integer.parseInt(br.readLine());
+
+        while (count-- > 0) {
+            st = new StringTokenizer(br.readLine());
+
+            switch (st.nextToken()) {
+                case "push":
+                    stack.push(Integer.valueOf(st.nextToken()));
+                    break;
+
+                case "pop":
+                    if (stack.isEmpty()) {
+                        sb.append(-1).append('\n');
+                    } else {
+                        sb.append(stack.pop()).append('\n');
+                    }
+                    break;
+
+                case "size":
+                    sb.append(stack.size()).append('\n');
+                    break;
+
+                case "empty":
+                    if (stack.isEmpty()) {
+                        sb.append(1).append('\n');
+                    } else {
+                        sb.append(0).append('\n');
+                    }
+                    break;
+
+                case "top":
+                    if (stack.isEmpty()) {
+                        sb.append(-1).append('\n');
+                    } else {
+                        sb.append(stack.peek()).append('\n');
+                    }
+            }
+
+        }
+
+        System.out.println(sb);
+    }*/
