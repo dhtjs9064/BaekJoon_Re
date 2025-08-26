@@ -24,7 +24,7 @@ public class Main {
     static int recur(int N) {
         // 최솟값을 구하고 + 1을 하는 이유는 현재 단계에서 한 번의 연산을 수행했다는 의미로,
         // 하위 단계에서 연산을 하고 현재 단계까지의 연산을 더하면 전체 연산의 횟수를 알 수 있다.
-        while (dp[N] == null) {
+        if (dp[N] == null) {
             // 모든 경우의 수를 고려한다
             if (N % 6 == 0) {
                 dp[N] = Math.min(recur(N - 1), Math.min(recur(N / 3), recur(N / 2))) + 1;
