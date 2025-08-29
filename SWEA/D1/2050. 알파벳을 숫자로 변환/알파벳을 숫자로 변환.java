@@ -41,7 +41,7 @@ class Solution {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < s.length(); i++) {
 
-            sb.append(s.charAt(i) - '0' - 16).append(' ');
+            sb.append(s.charAt(i) - 'A' + 1).append(' ');
         }
 
         System.out.println(sb);
